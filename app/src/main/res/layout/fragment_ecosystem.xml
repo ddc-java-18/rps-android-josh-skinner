@@ -39,6 +39,28 @@
        are seeing.
   -->
 
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/iteration_count_layout"
+    android:layout_width="150sp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    app:hintEnabled="true"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/terrain">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/iteration_count"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="# of iterations"
+      android:inputType="none"
+      android:focusable="false"
+      android:textAlignment="textEnd"
+      tools:text="1,000,000"/>
+
+  </com.google.android.material.textfield.TextInputLayout>
+
   <!--
       TODO Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
        the number of extant (surviving) breeds remaining in the ecosystem simulation. This view

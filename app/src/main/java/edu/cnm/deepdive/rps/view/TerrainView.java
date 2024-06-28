@@ -35,7 +35,6 @@ public class TerrainView extends View {
   private static final float COLOR_SATURATION = 1f;
   private static final float COLOR_VALUE = 1f;
 
-  private int numBreeds;
   private Paint[] breedPaints;
   private int[][] terrain;
 
@@ -52,7 +51,7 @@ public class TerrainView extends View {
    * Chains to the corresponding superclass constructor to initialize the inherited state.
    *
    * @param context Android context in which this instance is created.
-   * @param attrs Layout attributes.
+   * @param attrs   Layout attributes.
    */
   public TerrainView(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -61,8 +60,8 @@ public class TerrainView extends View {
   /**
    * Chains to the corresponding superclass constructor to initialize the inherited state.
    *
-   * @param context Android context in which this instance is created.
-   * @param attrs Layout attributes.
+   * @param context      Android context in which this instance is created.
+   * @param attrs        Layout attributes.
    * @param defStyleAttr Style attributes.
    */
   public TerrainView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -72,10 +71,10 @@ public class TerrainView extends View {
   /**
    * Chains to the corresponding superclass constructor to initialize the inherited state.
    *
-   * @param context Android context in which this instance is created.
-   * @param attrs Layout attributes.
+   * @param context      Android context in which this instance is created.
+   * @param attrs        Layout attributes.
    * @param defStyleAttr Style attributes.
-   * @param defStyleRes Style resource.
+   * @param defStyleRes  Style resource.
    */
   public TerrainView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
       int defStyleRes) {
@@ -116,9 +115,9 @@ public class TerrainView extends View {
   protected void onDraw(@NonNull Canvas canvas) {
     super.onDraw(canvas);
 
-    // TODO Do the following ONLY IF neither terrain nor breedPaints is null. THIS IS IMPORTANT!
+    if (terrain != null && breedPaints != null) {
 
-      // TODO Declare and initialize a float variable to hold the size of the individual ovals to be
+      // DONE: Declare and initialize a float variable to hold the size of the individual ovals to be
       //  drawn. To compute the value assigned to this variable:
       //  1. Get the width (or height) of this view with getWidth() (or getHeight()),
       //  2. Get the number of rows (or columns) in the terrain using terrain.length (or
@@ -128,7 +127,16 @@ public class TerrainView extends View {
       //     arithmetic. For example, you might use (float) getHeight() / terrain.length.
       //  4. Assign the division result to the variable.
 
-      // TODO Iterate over all of the rows and columns of terrain, using a traditional for loop
+      float cellSize =
+          Math.min((float) getWidth() / terrain[0].length, (float) getHeight() / terrain.length);
+
+      ShapePainter painter = (cellSize < 20)
+          ? Canvas::drawRect
+          : Canvas::drawOval;
+
+
+
+      // DONE: Iterate over all of the rows and columns of terrain, using a traditional for loop
       //  (that is, with a row index and a column index). For each element, use canvas.drawOval to
       //  draw an oval for the current element of terrain.
       //  - The x coordinate of the left side of the oval can be computed by multiplying the oval
@@ -147,9 +155,19 @@ public class TerrainView extends View {
       //    current row and column index positions is 5, you would use the Paint instance found in
       //    breedPaints[5]).
 
-      // TODO STRETCH GOAL: If the computed size of each oval is less than a threshold size of 20,
+      for (int rowIndex = 0; rowIndex < terrain.length; rowIndex++) {
+        float rowOffset = rowIndex * cellSize;
+        for (int colIndex = 0; colIndex < terrain[rowIndex].length; colIndex++) {
+          float colOffset = colIndex * cellSize;
+          painter.paint(canvas, colOffset, rowOffset, colOffset + cellSize, rowOffset + cellSize,
+              breedPaints[terrain[rowIndex][colIndex]]);
+        }
+      }
+
+      // DONE STRETCH GOAL: If the computed size of each oval is less than a threshold size of 20,
       //  draw rectangles (squares, in this case) instead of ovals (circles). However, do this
       //  WITHOUT including an if statement inside the loop. (Hint: Think about a lambda.)
+    }
 
   }
 
@@ -185,6 +203,13 @@ public class TerrainView extends View {
    */
   public void setTerrain(int[][] terrain) {
     this.terrain = terrain;
+  }
+
+  @FunctionalInterface
+  private interface ShapePainter {
+
+    void paint(Canvas canvas, float left, float top, float right, float bottom, Paint paint);
+
   }
 
 }

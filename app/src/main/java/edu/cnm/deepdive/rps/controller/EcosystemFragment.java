@@ -144,6 +144,11 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
           binding.terrain.invalidate();
         });
 
+    viewModel
+        .getIterationCount()
+        .observe(owner, (iterations) -> binding.iterationCount.setText(String.valueOf(iterations)));
+    // Fixme: 6/28/2024: use a string resource to format iterations
+
     // TODO Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<Long> containing the iteration count of the ecosystem simulation (see the
     //  getIterationCount() method in EcosystemViewModel); observe that LiveData, and pass the value

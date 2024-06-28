@@ -72,6 +72,12 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
   // TODO Define final String and int fields for the run speed key and the run speed default,
   //  respectively.
 
+  private final String runSpeedKey;
+  private final int runSpeedDefault;
+
+  private final String swapLikelihoodKey;
+  private final int swapLikelihoodDefault;
+
   // TODO Define final String and int fields for the swap likelihood key and the swap likelihood
   //  default, respectively.
 
@@ -106,6 +112,12 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
     //  res/xml/settings.xml for the resources involved; see the above code used to assign values to
     //  the key and default fields for an illustration of the technique.
 
+    runSpeedKey = res.getString(R.string.run_speed_key);
+    runSpeedDefault = res.getInteger(R.integer.run_speed_default);
+
+    swapLikelihoodKey = res.getString(R.string.swap_likelihood_key);
+    swapLikelihoodDefault = res.getInteger(R.integer.swap_likelihood_default);
+
     // TODO Assign values to the swap likelihood key and swap likelihood default fields. See
     //  res/xml/settings.xml for the resources involved; see the above code used to assign values to
     //    //  the key and default fields for an illustration of the technique.
@@ -133,17 +145,21 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
    */
   public void run() {
 
-    // TODO Declare an int local variable for the run speed; then, using the run speed key and run
+    // DONE Declare an int local variable for the run speed; then, using the run speed key and run
     //  speed default value fields (as outlined in the to-do items, above), obtain the run speed
     //  value from preferencesRepository, using the technique illustrated in the create() method
     //  (above).
 
-    // TODO Declare an int local variable for the swap likelihood; then, using the swap likelihood
+    int runSpeed = preferencesRepository.get(runSpeedKey, runSpeedDefault);
+
+    // DONE Declare an int local variable for the swap likelihood; then, using the swap likelihood
     //  key and swap likelihood default value fields (as outlined in the to-do items, above), obtain
     //  the swap likelihood value from preferencesRepository, using the technique illustrated in the
     //  create() method (above).
 
-    // TODO In the ecosystemRepository.run() method invocation below, specify the argument for the
+    int swapLikelihood = preferencesRepository.get(swapLikelihoodKey, swapLikelihoodDefault);
+
+    // DONE In the ecosystemRepository.run() method invocation below, specify the argument for the
     //  iterationsPerBatch parameter (currently 100) as a value computed from the run speed
     //  (obtained from the preferences earlier in this method) and the current terrain size.
     //  ---
@@ -165,7 +181,9 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
     //  argument in the ecosystemRepository.run() method invocation (below) should be computed as
     //  (runSpeed * currentTerrainSize * currentTerrainSize / 25).
 
-    // TODO In the ecosystemRepository.run() method invocation below, specify the value of the
+    int iterationsPerTick = runSpeed * currentTerrainSize * currentTerrainSize / 25;
+
+    // DONE In the ecosystemRepository.run() method invocation below, specify the value of the
     //  swapProbability parameter (currently 0) with a value computed from the swap likelihood
     //  (obtained from preferences earlier in this method).
     //  ---
@@ -178,7 +196,8 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
     //  argument in the ecosystemRepository.run() method invocation (below) should be computed as
     //  (swapLikelihood / 100f).
 
-    execute(ecosystemRepository.run(100, 0, TICK_MILLISECONDS), (ignored) -> {}, () -> {});
+
+    execute(ecosystemRepository.run(iterationsPerTick, swapLikelihood / 100f, TICK_MILLISECONDS), (ignored) -> {}, () -> {});
   }
 
   /**
