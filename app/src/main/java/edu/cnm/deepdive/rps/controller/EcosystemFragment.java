@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -146,20 +147,23 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
 
     viewModel
         .getIterationCount()
-        .observe(owner, (iterations) -> binding.iterationCount.setText(String.valueOf(iterations)));
-    // Fixme: 6/28/2024: use a string resource to format iterations
+        .observe(owner, (iterations) -> binding.iterationCount.setText(getString(R.string.iteration_count_format, iterations)));
 
-    // TODO Using the same viewModel as is used in the operations above, get a reference to the
+    // DONE Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<Long> containing the iteration count of the ecosystem simulation (see the
     //  getIterationCount() method in EcosystemViewModel); observe that LiveData, and pass the value
     //  received by the observer to the corresponding text widgets in the fragment_ecosystem layout,
     //  to display the iteration count.
 
-    // TODO Using the same viewModel as is used in the operations above, get a reference to the
+    // DONE Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<Integer> containing the number of extant (surviving) breeds in the ecosystem
     //  simulation (see the getCurrentBreedCount() method in EcosystemViewModel); observe that
     //  LiveData, and pass the value received by the observer to the corresponding text widgets in
     //  the fragment_ecosystem layout, to display the breed count.
+
+    viewModel
+        .getCurrentBreedCount()
+        .observe(owner, (numBreeds) -> binding.breedCount.setText(String.valueOf(numBreeds)));
 
     // TODO Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<int[]> containing the current population sizes of all of the breeds in the
