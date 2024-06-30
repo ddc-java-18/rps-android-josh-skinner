@@ -19,16 +19,18 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <!--
-      TODO Create a new launcher icon suitable for this app. Then, change the android:icon and
+      DONE: Create a new launcher icon suitable for this app. Then, change the android:icon and
        android:roundIcon attribute values (below) to refer to the new icon.
+
+       Need to get a .png file for each and make sure sizing is correct to run. 524 x524 px or
   -->
 
   <application
     android:allowBackup="false"
-    android:icon="@mipmap/ic_launcher"
+    android:icon="@mipmap/og_launchbot"
+    android:roundIcon="@mipmap/og_launchbot_round"
     android:label="@string/app_name"
     android:name="edu.cnm.deepdive.rps.RpsApplication"
-    android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,DataExtractionRules">

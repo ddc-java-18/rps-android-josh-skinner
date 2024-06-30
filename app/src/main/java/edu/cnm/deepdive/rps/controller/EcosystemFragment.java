@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
@@ -148,18 +149,6 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
     viewModel
         .getIterationCount()
         .observe(owner, (iterations) -> binding.iterationCount.setText(getString(R.string.iteration_count_format, iterations)));
-
-    // DONE Using the same viewModel as is used in the operations above, get a reference to the
-    //  LiveData<Long> containing the iteration count of the ecosystem simulation (see the
-    //  getIterationCount() method in EcosystemViewModel); observe that LiveData, and pass the value
-    //  received by the observer to the corresponding text widgets in the fragment_ecosystem layout,
-    //  to display the iteration count.
-
-    // DONE Using the same viewModel as is used in the operations above, get a reference to the
-    //  LiveData<Integer> containing the number of extant (surviving) breeds in the ecosystem
-    //  simulation (see the getCurrentBreedCount() method in EcosystemViewModel); observe that
-    //  LiveData, and pass the value received by the observer to the corresponding text widgets in
-    //  the fragment_ecosystem layout, to display the breed count.
 
     viewModel
         .getCurrentBreedCount()

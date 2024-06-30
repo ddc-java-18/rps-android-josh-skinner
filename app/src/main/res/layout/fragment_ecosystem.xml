@@ -33,7 +33,7 @@
     app:layout_constraintEnd_toEndOf="parent"/>
 
   <!--
-      TODO Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
+      DONE Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
        the number of iterations executed (so far) in the ecosystem simulation. This view must be
        labeled (e.g., using another TextView or a TextInputLayout), so the user knows what they
        are seeing.
@@ -96,7 +96,7 @@
   </com.google.android.material.textfield.TextInputLayout>
 
   <!--
-      TODO Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
+      DONE Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
        the population counts of all breeds. This view must be labeled (e.g., using another
        TextView or a TextInputLayout), so the user knows what they are seeing. The population
        counts of all breeds should be displayed very simply, in a single text widget, with one
