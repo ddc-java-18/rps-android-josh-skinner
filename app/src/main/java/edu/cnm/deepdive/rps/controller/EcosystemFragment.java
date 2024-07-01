@@ -160,6 +160,16 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
     //  and pass the value received by the observer (after any necessary conversion from int[] to
     //  one or more Strings) to the corresponding text widgets in the fragment_ecosystem layout, to
     //  display the population counts.
+
+    viewModel
+        .getPopulations()
+        .observe(owner, (populations) -> {binding.populationCount.setText();});
+
+
   }
+
+
+
+
 
 }

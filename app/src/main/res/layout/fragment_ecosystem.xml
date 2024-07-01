@@ -77,7 +77,7 @@
     android:layout_margin="@dimen/half_static_spacing"
     app:hintEnabled="true"
     app:layout_constraintStart_toEndOf="@id/iteration_count_layout"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/population_count_layout"
     app:layout_constraintTop_toBottomOf="@+id/terrain"
     app:layout_constraintWidth_max="@dimen/text_widget_max_width"
     app:layout_constraintHorizontal_chainStyle="spread_inside">
@@ -95,13 +95,40 @@
 
   </com.google.android.material.textfield.TextInputLayout>
 
+
+
   <!--
-      DONE Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
+      Todo Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
        the population counts of all breeds. This view must be labeled (e.g., using another
        TextView or a TextInputLayout), so the user knows what they are seeing. The population
        counts of all breeds should be displayed very simply, in a single text widget, with one
        value in each line.
   -->
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/population_count_layout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_static_spacing"
+    app:hintEnabled="true"
+    app:layout_constraintStart_toEndOf="@id/breed_count_layout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/terrain"
+    app:layout_constraintWidth_max="@dimen/text_widget_max_width"
+    app:layout_constraintHorizontal_chainStyle="spread_inside">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/population_count"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/population_count"
+      android:inputType="none"
+      android:focusable="false"
+      android:textAlignment="textEnd"
+      tools:text="5"/>
+
+  </com.google.android.material.textfield.TextInputLayout>
 
   <!--
       IMPORTANT: For full credit, please do not include any hard-coded strings (e.g., for labels) or
