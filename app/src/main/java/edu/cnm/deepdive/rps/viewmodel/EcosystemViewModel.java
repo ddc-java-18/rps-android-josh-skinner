@@ -69,17 +69,11 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
   private final String toroidalTopologyKey;
   private final boolean toroidalTopologyDefault;
 
-  // TODO Define final String and int fields for the run speed key and the run speed default,
-  //  respectively.
-
   private final String runSpeedKey;
   private final int runSpeedDefault;
 
   private final String swapLikelihoodKey;
   private final int swapLikelihoodDefault;
-
-  // TODO Define final String and int fields for the swap likelihood key and the swap likelihood
-  //  default, respectively.
 
   private int currentTerrainSize;
 
@@ -108,17 +102,18 @@ public class EcosystemViewModel extends ViewModel implements DefaultLifecycleObs
     toroidalTopologyKey = res.getString(R.string.toroidal_topology_key);
     toroidalTopologyDefault = res.getBoolean(R.bool.toroidal_topology_default);
 
-    // TODO Assign values to the run speed key and run speed default fields. See
+    runSpeedKey = res.getString(R.string.run_speed_key);
+    runSpeedDefault = res.getInteger(R.integer.run_speed_default);
+
+    // Done Assign values to the run speed key and run speed default fields. See
     //  res/xml/settings.xml for the resources involved; see the above code used to assign values to
     //  the key and default fields for an illustration of the technique.
 
-    runSpeedKey = res.getString(R.string.run_speed_key);
-    runSpeedDefault = res.getInteger(R.integer.run_speed_default);
 
     swapLikelihoodKey = res.getString(R.string.swap_likelihood_key);
     swapLikelihoodDefault = res.getInteger(R.integer.swap_likelihood_default);
 
-    // TODO Assign values to the swap likelihood key and swap likelihood default fields. See
+    // Done Assign values to the swap likelihood key and swap likelihood default fields. See
     //  res/xml/settings.xml for the resources involved; see the above code used to assign values to
     //    //  the key and default fields for an illustration of the technique.
 
