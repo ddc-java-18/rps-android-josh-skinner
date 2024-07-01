@@ -22,7 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
@@ -30,13 +29,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.rps.R;
 import edu.cnm.deepdive.rps.databinding.FragmentEcosystemBinding;
 import edu.cnm.deepdive.rps.viewmodel.EcosystemViewModel;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Presents a user interface comprising menu items in the action bar (and the overflow menu), as
@@ -148,28 +148,26 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
 
     viewModel
         .getIterationCount()
-        .observe(owner, (iterations) -> binding.iterationCount.setText(getString(R.string.iteration_count_format, iterations)));
+        .observe(owner, (iterations) -> binding.iterationCount.setText(
+            getString(R.string.large_number_format, iterations)));
 
     viewModel
         .getCurrentBreedCount()
         .observe(owner, (numBreeds) -> binding.breedCount.setText(String.valueOf(numBreeds)));
 
-    // TODO Using the same viewModel as is used in the operations above, get a reference to the
-    //  LiveData<int[]> containing the current population sizes of all of the breeds in the
-    //  ecosystem (see the getPopulations() method in EcosystemViewModel); observe that LiveData,
-    //  and pass the value received by the observer (after any necessary conversion from int[] to
-    //  one or more Strings) to the corresponding text widgets in the fragment_ecosystem layout, to
-    //  display the population counts.
 
     viewModel
         .getPopulations()
-        .observe(owner, (populations) -> {binding.populationCount.setText();});
+        .observe(owner, (populations) -> {
+          String populationsDisplay = Arrays.stream(populations)
+              .mapToObj((population) -> getString(R.string.large_number_format, population))
+              .collect(Collectors.joining(System.lineSeparator()));
+          binding.populationSizes.setText(populationsDisplay);
+
+        });
 
 
   }
-
-
-
 
 
 }

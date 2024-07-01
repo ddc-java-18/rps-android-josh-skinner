@@ -25,12 +25,14 @@
 
   <edu.cnm.deepdive.rps.view.TerrainView
     android:id="@+id/terrain"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
     android:layout_margin="@dimen/half_static_spacing"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    app:layout_constraintEnd_toStartOf="@id/iteration_count_layout"
+    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
 
   <!--
       DONE Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
@@ -45,9 +47,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
     app:hintEnabled="true"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/breed_count_layout"
-    app:layout_constraintTop_toBottomOf="@+id/terrain"
+    app:layout_constraintStart_toEndOf="@id/terrain"
+    app:layout_constraintEnd_toStartOf="@id/population_sizes_layout"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/breed_count_layout"
     app:layout_constraintWidth_max="@dimen/text_widget_max_width">
 
 
@@ -74,10 +77,12 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
+    android:layout_marginVertical="0dp"
     app:hintEnabled="true"
-    app:layout_constraintStart_toEndOf="@id/iteration_count_layout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/terrain"
+    app:layout_constraintStart_toStartOf="@id/iteration_count_layout"
+    app:layout_constraintEnd_toEndOf="@id/iteration_count_layout"
+    app:layout_constraintTop_toBottomOf="@id/iteration_count_layout"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintWidth_max="@dimen/text_widget_max_width">
 
 
@@ -85,9 +90,9 @@
       android:id="@+id/breed_count"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:focusable="false"
       android:hint="@string/breed_count_label"
       android:inputType="none"
+      android:focusable="false"
       android:textAlignment="textEnd"
       tools:text="5"/>
 
@@ -96,7 +101,11 @@
 
 
   <!--
-
+      Todo Add a non-editable view (e.g. TextView, TextInputEditText w/ editable=false) to display
+       the population counts of all breeds. This view must be labeled (e.g., using another
+       TextView or a TextInputLayout), so the user knows what they are seeing. The population
+       counts of all breeds should be displayed very simply, in a single text widget, with one
+       value in each line.
   -->
 
   <com.google.android.material.textfield.TextInputLayout
@@ -105,12 +114,11 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
     app:hintEnabled="true"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintStart_toEndOf="@id/iteration_count_layout"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/iteration_count_layout"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintWidth_max="@dimen/text_widget_max_width"
-    app:layout_constraintHorizontal_chainStyle="spread_inside"
     app:layout_constrainedHeight="true">
 
 

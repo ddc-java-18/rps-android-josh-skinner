@@ -44,7 +44,8 @@
   <string name="run_speed_title">Speed of ecosystem simulation</string>
   <string name="iteration_count_label"># of iterations</string>
   <string name="breed_count_label"># of breeds</string>
-  <string name="iteration_count_format">%,d</string>
+  <string name="large_number_format">%,d</string>
   <string name="population_count">population count</string>
+  <string name="population_sizes_label">Population sizes\n</string>
 
 </resources>
